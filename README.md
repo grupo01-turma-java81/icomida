@@ -14,7 +14,7 @@ Seu objetivo principal é proporcionar uma diversidade de produtos, onde comérc
 O projeto visa resolver problemas como:
 
 * Distancia entre comércio e cliente.
-* Tempo de Percurso.
+* Acesso a alimentos saudáveis.
 * Praticidade no dia-a-dia
 
 ## 📀 Escopo do Projeto
