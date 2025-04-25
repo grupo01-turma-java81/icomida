@@ -7,11 +7,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -35,8 +37,15 @@ public class Produto {
     @Positive(message = "O preço precisa ser maior que zero")
     private BigDecimal preco;
     
+    @NotNull
+    private Boolean produtoSaudavel;
+    
     @UpdateTimestamp
     private LocalDateTime data;
+    
+    @ManyToOne
+    @JsonIgnoreProperties("produto")
+    private Categoria categoria;
 
     public Long getId() {
         return id;
@@ -68,5 +77,21 @@ public class Produto {
 
     public void setData(LocalDateTime data) {
         this.data = data;
+    }
+
+    public Boolean getProdutoSaudavel() {
+        return produtoSaudavel;
+    }
+
+    public void setProdutoSaudavel(Boolean produtoSaudavel) {
+        this.produtoSaudavel = produtoSaudavel;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
