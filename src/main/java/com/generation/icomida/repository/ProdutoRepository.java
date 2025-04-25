@@ -11,5 +11,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     
     public List<Produto> findByNomeContainingIgnoreCase(@Param("nome") String nome);
     
-    public List<Produto> findByProdutoSaudavelContaining(@Param("saudavel") Boolean saudavel);
+    public List<Produto> findByProdutoSaudavelContainingIgnoreCase(@Param("saudavel") String saudavel);
 }

@@ -37,8 +37,9 @@ public class Produto {
     @Positive(message = "O preço precisa ser maior que zero")
     private BigDecimal preco;
     
-    @NotNull
-    private Boolean produtoSaudavel;
+    @NotBlank
+    @Size(min = 3)
+    private String produtoSaudavel;
     
     @UpdateTimestamp
     private LocalDateTime data;
@@ -79,11 +80,11 @@ public class Produto {
         this.data = data;
     }
 
-    public Boolean getProdutoSaudavel() {
+    public String getProdutoSaudavel() {
         return produtoSaudavel;
     }
 
-    public void setProdutoSaudavel(Boolean produtoSaudavel) {
+    public void setProdutoSaudavel(String produtoSaudavel) {
         this.produtoSaudavel = produtoSaudavel;
     }
 

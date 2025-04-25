@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.icomida.model.Produto;
@@ -19,17 +18,18 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public ResponseEntity<List<Produto>> listaTodosProdutos() {
-	return ResponseEntity.ok(produtoRepository.findAll());
+    public List<Produto> listaTodosProdutos() {
+	return produtoRepository.findAll();
     }
 
-    public ResponseEntity<Produto> buscarPorId(Long id) {
-	return produtoRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
-		.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    public Produto buscarPorId(Long id) {
+	Optional<Produto> produto = produtoRepository.findById(id);
+	
+	return produto.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public ResponseEntity<List<Produto>> buscarPorNome(@PathVariable String nome) {
-	return ResponseEntity.ok(produtoRepository.findByNomeContainingIgnoreCase(nome));
+    public List<Produto> buscarPorNome(String nome) {
+	return produtoRepository.findByNomeContainingIgnoreCase(nome);
     }
 
     public ResponseEntity<Produto> cadastrarProduto(Produto produto) {
@@ -52,8 +52,8 @@ public class ProdutoService {
 	produtoRepository.deleteById(id);
     }
 
-    public List<Produto> recomendacaoDeProdutoSaudavel(Boolean saudavel) {
-	return produtoRepository.findByProdutoSaudavelContaining(saudavel);
+    public List<Produto> recomendacaoDeProdutoSaudavel(String saudavel) {
+	return produtoRepository.findByProdutoSaudavelContainingIgnoreCase(saudavel);
     }
 
 }

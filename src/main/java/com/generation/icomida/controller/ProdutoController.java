@@ -24,26 +24,28 @@ import jakarta.validation.Valid;
 @RequestMapping("/produto")
 public class ProdutoController {
     
+    
+    
     @Autowired
     private ProdutoService produtoService;
 
     @GetMapping
     public ResponseEntity<List<Produto>> getAll() {
-	return produtoService.listaTodosProdutos();
+	return ResponseEntity.ok(produtoService.listaTodosProdutos());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Produto> getById(@PathVariable Long id) {
-	return produtoService.buscarPorId(id);
+	return ResponseEntity.ok().body(produtoService.buscarPorId(id));
     }
 
     @GetMapping("/nome/{nome}")
     public ResponseEntity<List<Produto>> getByNome(@PathVariable String nome) {
-	return produtoService.buscarPorNome(nome);
+	return ResponseEntity.ok(produtoService.buscarPorNome(nome));
     }
     
     @GetMapping("/produtosaudavel/{saudavel}")
-    public ResponseEntity<List<Produto>> getProdutoSaudavel(@PathVariable Boolean saudavel) {
+    public ResponseEntity<List<Produto>> getProdutoSaudavel(@PathVariable String saudavel) {
 	return ResponseEntity.ok(produtoService.recomendacaoDeProdutoSaudavel(saudavel));
     }
 
