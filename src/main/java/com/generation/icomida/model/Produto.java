@@ -45,11 +45,11 @@ public class Produto {
     private LocalDateTime data;
     
     @ManyToOne
-    @JsonIgnoreProperties("produto")
+    @JsonIgnoreProperties("produtos")
     private Categoria categoria;
     
     @ManyToOne
-    @JsonIgnoreProperties("produto")
+    @JsonIgnoreProperties("produtos")
     private Usuario usuario;
 
     public Long getId() {
